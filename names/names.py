@@ -14,19 +14,29 @@ f.close()
 duplicates = []
 
 # My version - running at .02 seconds
-lru = LRUCache()
-for name_1 in names_1:
-    lru.set(name_1, name_1)
+# lru = LRUCache()
+# for name_1 in names_1:
+#     lru.set(name_1, name_1)
     
-for name_2 in names_2:
-    if lru.get(name_2):
-        duplicates.append(name_2)
+# for name_2 in names_2:
+#     if lru.get(name_2):
+#         duplicates.append(name_2)
+
+# another option - using python built in intersection - fastest option, running at .004 - .005 seconds
+# duplicates = list(set(names_1).intersection(set(names_2)))
+
+# option 3 - runs at the same speed as the python intersection function...  .004 - .005 seconds
+def intersecting(l1, l2):
+    return list(set(l1) & set(l2))
+
+duplicates = intersecting(names_1, names_2)
 
 # Original GitHub Code - running at 6-9 seconds
 # for name_1 in names_1:
 #     for name_2 in names_2:
 #         if name_1 == name_2:
 #             duplicates.append(name_1)
+
 
 
 end_time = time.time()
